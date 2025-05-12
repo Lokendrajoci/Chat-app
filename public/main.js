@@ -19,7 +19,7 @@ function sendMessage() {
   if (messageInput.value === "") {
     return;
   }
-  //   console.log(messageInput.value);
+  
 
   const data = {
     name: nameInput.value,
@@ -30,7 +30,7 @@ function sendMessage() {
   socket.emit("message", data);
   addMessageToUI(true, data);
   messageInput.value = "";
-}
+} 
 
 socket.on("chat-message", (data) => {
   //   console.log(data);

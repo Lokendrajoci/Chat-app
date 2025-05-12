@@ -8,17 +8,25 @@ const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+// 
 const io = require("socket.io")(server);
 
+
+
+// Middleware
 app.use(express.static(path.join(__dirname, "public")));
 
+
+// Routes
 let socketsConnected = new Set();
 
 io.on("connection", onConnected);
 
 function onConnected(socket) {
   console.log(socket.id, "connected");
+  //
   socketsConnected.add(socket.id);
+
   io.emit("clients-total", socketsConnected.size);
 
   socket.on("disconnect", () => {
